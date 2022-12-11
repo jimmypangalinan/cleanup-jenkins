@@ -1,0 +1,4 @@
+[Service]
+ExecStart=/bin/sh -c 'exec /tmp/slaveCleanup.sh > /tmp/backup/logs/cleanup-docker-$(date +\%d-\%m-\%Y).log 2>&1'
+#StandardOutput=/tmp/slaveCleanup.log
+#StandartError=/tmp/salveCleanup.log

@@ -1,9 +1,9 @@
 #!/bin/bash
 #This script should be located on each jenkins slave, and the jenkins user should have permission to run it with sudo
 
-MOUNTPOINTS="/"
-THRESHOLD1=3
-THRESHOLD2=5
+MOUNTPOINTS="/jenkinsmasters"
+THRESHOLD1=20
+THRESHOLD2=30
 
 while true
 do
@@ -30,6 +30,7 @@ CURRENT=$(df ${MOUNTPOINTS} | grep / | awk '{ print $5 }' | sed 's/%//g')
                         systemctl stop docker
                         echo "Deleting content of /jenkinsmasters/docker"
                         rm -rf /jenkinsmasters/docker/*
+                        rm -rf /var/snap/docker/common/var-lib-docker/overlay2/*
                         systemctl start docker
 
                         else
@@ -54,6 +55,7 @@ CURRENT=$(df ${MOUNTPOINTS} | grep / | awk '{ print $5 }' | sed 's/%//g')
                             systemctl stop docker
                             echo "Deleting content of /jenkinsmasters/docker"
                             rm -rf /jenkinsmasters/docker/*
+                            rm -rf /var/snap/docker/common/var-lib-docker/overlay2/*
                             systemctl start docker
 
                         fi
